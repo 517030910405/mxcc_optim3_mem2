@@ -1,9 +1,5 @@
 
 
-
-
-
-
 SECTION .text   
 
 set_func:
@@ -351,6 +347,16 @@ str_add:
         mov     rdi, rax
         call    memcpy
         mov     rax, qword [rbp-8H]
+        lea     rdx, [rax+8H]
+        mov     rax, qword [rbp-18H]
+        mov     rax, qword [rax]
+        mov     rcx, rax
+        mov     rax, qword [rbp-20H]
+        mov     rax, qword [rax]
+        add     rax, rcx
+        add     rax, rdx
+        mov     byte [rax], 0
+        mov     rax, qword [rbp-8H]
         leave
         ret
 
@@ -508,6 +514,11 @@ L_012:  mov     rax, qword [rel n]
         mov     rdi, rcx
         call    memcpy
         mov     rax, qword [rbp-8H]
+        lea     rdx, [rax+8H]
+        mov     rax, qword [rbp-10H]
+        add     rax, rdx
+        mov     byte [rax], 0
+        mov     rax, qword [rbp-8H]
         leave
         ret
 
@@ -599,6 +610,11 @@ substring:
         mov     rdi, rcx
         call    memcpy
         mov     rax, qword [rbp-8H]
+        lea     rdx, [rax+8H]
+        mov     rax, qword [rbp-10H]
+        add     rax, rdx
+        mov     byte [rax], 0
+        mov     rax, qword [rbp-8H]
         leave
         ret
 
@@ -616,8 +632,5 @@ ord:
         movsx   rax, al
         pop     rbp
         ret
-
-
-
 
 
